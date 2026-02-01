@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No More Bell Rings</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#c9a66b;
+  --muted:#b0a89f;
+  --text:#f5f5f5;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(-45deg,#0f0f0f,#1a1a1a,#141414,#1f1f1f);
+  background-size:400% 400%;
+  animation:bgMove 20s ease infinite;
+  overflow-x:hidden;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Floating particles */
+.particle{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:rgba(201,166,107,.15);
+  border-radius:50%;
+  animation:float 12s linear infinite;
+  z-index:0;
+}
+@keyframes float{
+  from{transform:translateY(100vh);opacity:0}
+  to{transform:translateY(-10vh);opacity:1}
+}
+
+/* Sections */
+section{
+  min-height:100vh;
+  padding:90px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+.panel{
+  background:rgba(20,20,20,.65);
+  backdrop-filter:blur(10px);
+  border-radius:30px;
+  padding:50px 40px;
+  max-width:820px;
+  width:100%;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation:panelIn 1.4s ease;
+}
+
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(40px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+
+/* Typography */
+h1,h2,h3{font-family:'Playfair Display',serif}
+h1{
+  font-size:3.6rem;
+  color:var(--gold);
+  text-shadow:0 0 30px rgba(201,166,107,.25);
+}
+h2{font-size:2.5rem;margin-bottom:20px}
+p{
+  color:var(--muted);
+  line-height:1.9;
+  margin-bottom:36px;
+}
+
+/* Buttons */
+.btn{
+  padding:16px 36px;
+  border-radius:20px;
+  border:1px solid rgba(201,166,107,.6);
+  background:linear-gradient(145deg,#1e1e1e,#121212);
+  color:var(--text);
+  cursor:pointer;
+  transition:.4s;
+  margin:6px;
+}
+.btn:hover{
+  background:var(--gold);
+  color:#111;
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 15px 40px rgba(201,166,107,.4);
+}
+
+.hidden{display:none}
+
+/* Gallery */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+  margin-top:40px;
+}
+.gallery img{
+  width:100%;
+  border-radius:22px;
+  filter:brightness(.8);
+  transition:.5s;
+}
+.gallery img:hover{
+  filter:brightness(1);
+  transform:scale(1.08);
+  box-shadow:0 25px 60px rgba(0,0,0,.6);
+}
+
+/* Spotify */
+.spotify{
+  margin-top:40px;
+  animation:fadeUp .8s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+/* Confessions */
+.confession-box{
+  margin-top:40px;
+  background:rgba(255,255,255,.05);
+  border-radius:26px;
+  padding:34px;
+}
+textarea{
+  width:100%;
+  background:#0f0f0f;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--text);
+  padding:16px;
+  border-radius:14px;
+  margin:16px 0;
+}
+.confession{
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px 0;
+  color:var(--muted);
+}
+
+/* Fade utility */
+.fade{animation:fade .8s ease}
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PARTICLES -->
+<script>
+for(let i=0;i<30;i++){
+  let p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDelay=Math.random()*12+"s";
+  p.style.opacity=Math.random();
+  document.body.appendChild(p);
+}
+const PASSWORD = "4141";
+
+function unlock(){
+  const input = document.getElementById("pwd").value;
+  if(input === PASSWORD){
+    document.getElementById("lock").style.display = "none";
+  } else {
+    document.getElementById("err").innerText = "Wrong password";
+  }
+}
+
+</script>
+
+<!-- PAGE 1 -->
+<section id="p1">
+  <div class="panel">
+    <h1>No More Bell Rings</h1>
+    <p>Class XII (2025–2026)<br>DR GL DUTTA DAV Public School</p>
+    <button class="btn" onclick="go('p2')">Enter Farewell</button>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section id="p2" class="hidden">
+  <div class="panel">
+    <h2>Event Details</h2>
+    <p>
+      📍 Galverch – The Lounge, Gargee Grand, Patna<br><br>
+      📅 08 February 2026<br>
+      ⏰ 2:30 PM – 7:00 PM<br><br>
+      💰 ₹1400
+    </p>
+    <button class="btn" onclick="go('p3')">Enter Memory Mode</button>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="p3" class="hidden">
+  <div class="panel">
+    <h2>Enter Memory Mode</h2>
+    <p>
+      The bell stopped ringing.<br>
+      The memories didn’t.
+    </p>
+    <button class="btn" onclick="go('p4')">Step Inside</button>
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section id="p4" class="hidden">
+  <div class="panel">
+    <h2>Memory Mode</h2>
+    <p>Choose what you want to feel again.</p>
+
+    <button class="btn" onclick="toggle('song')">Play Our Song</button>
+    <button class="btn" onclick="toggle('gallery')">School Memories</button>
+    <button class="btn" onclick="toggle('conf')">Confessions</button>
+
+    <div id="song" class="spotify hidden">
+      <iframe style="border-radius:18px"
+        src="https://open.spotify.com/embed/track/1R7ChEm1x3mGhDWXKnPSXn"
+        width="300" height="380" frameborder="0"
+        allow="autoplay; encrypted-media">
+      </iframe>
+    </div>
+
+   <div id="gallery" class="gallery hidden">
+  <img src="images/group.jpg" alt="Class Group Photo">
+  <img src="images/school.jpg" alt="School Building">
+  <img src="images/street.jpg" alt="Farewell Street Moment">
+  <img src="images/heart.jpg" alt="Final Memory">
+</div>
+    <div id="conf" class="confession-box hidden">
+      <h3>These were always said.<br>Just never out loud.</h3>
+      <textarea id="text" rows="3" placeholder="Anonymous. Honest."></textarea>
+      <button class="btn" onclick="add()">Post</button>
+      <div id="list"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function go(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+function toggle(id){
+  document.getElementById(id).classList.toggle('hidden');
+}
+function add(){
+  let t=document.getElementById('text');
+  if(!t.value.trim())return;
+  let d=document.createElement('div');
+  d.className='confession';
+  d.innerText=t.value;
+  document.getElementById('list').prepend(d);
+  t.value='';
+}
+</script>
+
+</body>
+<!-- PASSWORD LOCK -->
+<div id="lock" style="
+  position:fixed;
+  inset:0;
+  background:linear-gradient(-45deg,#0f0f0f,#1a1a1a,#141414,#1f1f1f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+">
+  <div class="panel">
+    <h2>Enter Password</h2>
+    <p>This memory is locked.</p>
+
+    <input id="pwd" type="password" placeholder="Password"
+      style="
+        width:100%;
+        padding:14px;
+        border-radius:14px;
+        border:none;
+        margin-bottom:18px;
+      ">
+
+    <button class="btn" onclick="unlock()">Unlock</button>
+    <p id="err" style="color:#ff7a7a;margin-top:10px"></p>
+  </div>
+</div>
+</html>
